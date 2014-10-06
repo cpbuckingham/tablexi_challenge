@@ -18,7 +18,7 @@ class Students
   end
 
   def name_string
-    all.map { |student| student[:name] }.join(' ')
+    all.collect { |student| student[:name] }.join(' ')
   end
 
   def find_first_older_than(age)
@@ -26,6 +26,7 @@ class Students
       if student[:age] > age
         return student
       end
+      student
     end
   end
 
@@ -49,8 +50,6 @@ class Students
   end
 
   def student_present?(student_to_find)
-    all.include?(student_to_find)
-
     all.each do |student|
       if student == student_to_find
         return true

@@ -1,15 +1,38 @@
 require 'csv'
-
-total = 15.05
-arr=[]
+arr = []
 table = CSV.foreach('data/menu_data.csv', headers: true)
 table.each do |row|
-  arr << row.to_h
+  new = row.to_h
+  arr << new
 end
-test1 = arr.repeated_combination(1).to_a.flatten
-test2 = arr.repeated_combination(2).to_a.flatten
-test3 = arr.repeated_combination(3).to_a.flatten
-test4 = arr.repeated_combination(4).to_a.flatten
+
+
+def longest_receipt(arr)
+  total = 15.05
+  lowest_price = arr.inject do |memo, hash|
+    memo["price"] < hash["price"] ? memo : hash
+  end
+  ((total / lowest_price["price"].to_f).to_i) - 1
+end
+
+def totaling_array(arr)
+  all_possible_receipts = []
+  totaling = longest_receipt(arr)
+  totaling.times do |i|
+    arr.repeated_combination(i+1).each do |combos|
+      all_possible_receipts << combos
+    end
+  end
+  validator = valid_receipts_from_all(all_possible_receipts)
+  if validator != []
+    validator.map do |final_items|
+      p "Valid Combination:"
+      print "#{final_items}\n\n"
+    end
+  else
+    p "Sorry no menu items match that price"
+  end
+end
 
 def array_total(arr)
   total = 0.0
@@ -19,11 +42,11 @@ def array_total(arr)
   total
 end
 
-p array_total(test1).round(2)
-p array_total(test2).round(2)
-p array_total(test3).round(2)
-p array_total(test4).round(2)
+def valid_receipts_from_all(arr)
+  arr.select { |receipt| array_total(receipt) == 8.60 }
+end
 
+totaling_array(arr)
 
 
 # class MenuCalculator

@@ -1,11 +1,21 @@
+# class MenuCalculator
+#   def initialize
+#     total = 15.05
+#         menu =[]
+#         cvs = CSV.foreach('data/menu_data.csv', headers: true)
+#       cvs.each do |row|
+#       new = row.to_h
+#     menu << new
+
+
 require 'csv'
+
 arr = []
 table = CSV.foreach('data/menu_data.csv', headers: true)
 table.each do |row|
   new = row.to_h
   arr << new
 end
-
 
 def longest_receipt(arr)
   total = 15.05
@@ -43,26 +53,10 @@ def array_total(arr)
 end
 
 def valid_receipts_from_all(arr)
-  arr.select { |receipt| array_total(receipt) == 8.60 }
+  arr.select { |receipt| array_total(receipt) == 15.05 }
 end
 
 totaling_array(arr)
 
 
-# class MenuCalculator
-#   def initialize(total, csv)
-#     @total = total
-#     @menu = CSV.foreach('data/menu_data.csv', headers: true)
-#     csv.map do |row|
-#       row.to_h
-#     end
-#
-#     def one_item_equals_total
-#       @menu.each do |food|
-#         if food[:cost].count == @total
-#           return food[:food] + food[:price]
-#         end
-#       end
-#     end
-#   end
-# end
+

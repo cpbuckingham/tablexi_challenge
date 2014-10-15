@@ -1,13 +1,16 @@
-# class MenuCalculator
-#   def initialize
-#     total = 15.05
-#         menu =[]
-#         cvs = CSV.foreach('data/menu_data.csv', headers: true)
-#       cvs.each do |row|
-#       new = row.to_h
-#     menu << new
+class MenuCalculator
+  def initialize
+  end
 
-
+  def read_file
+    arr = []
+    table = CSV.foreach('data/menu_data.csv', headers: true)
+    table.each do |row|
+      new = row.to_h
+      arr << new
+    end
+  end
+  end
 require 'csv'
 
 arr = []

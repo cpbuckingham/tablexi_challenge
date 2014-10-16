@@ -7,10 +7,10 @@ class MenuCalculator
       f.each_line do |line|
         arr << line
       end
-  @money = arr[0][1..-1].to_f
-    @array = arr[1..-1]
+      @money = arr[0][1..-1].to_f
+      @array = arr[1..-1]
     end
-  @array = @array.reduce(Array.new) do |memo, str|
+    @array = @array.reduce(Array.new) do |memo, str|
       hash = {}
       arr = str.split(",")
       hash[:food] = arr[0]
